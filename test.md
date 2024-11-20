@@ -5,7 +5,7 @@
 ### Test Case #1
 | **Field**            |                                   | **Field**            |                                    |
 |-----------------------|-----------------------------------|-----------------------|------------------------------------|
-| **Test Case #:**   1   |                                   | **Test Case Name:**   | User Registration                 |
+| **Test Case #:**      |     1                              | **Test Case Name:**   | User Registration                 |
 | **System:**           | DRX Website                      | **Subsystem:**        | User Management                   |
 | **Designed by:**      |Gopal Agarwal                                   | **Design Date:**      |  20th Nov 2024                                  |
 | **Executed by:**      |                                   | **Execution Date:**   |                                    |
@@ -31,7 +31,7 @@
 ### Test Case #2
 | **Field**            |                                   | **Field**            |                                    |
 |-----------------------|-----------------------------------|-----------------------|------------------------------------|
-| **Test Case #:** 2     |                                   | **Test Case Name:**   | Login Functionality         |
+| **Test Case #:**      |     2                              | **Test Case Name:**   | Login Functionality         |
 | **System:**           | DRX Website                      | **Subsystem:**        | User Management                   |
 | **Designed by:**      | Gopal Agarwal                                  | **Design Date:**      |    20th Nov 2024                                |
 | **Executed by:**      |                                   | **Execution Date:**   |                                    |
@@ -56,7 +56,7 @@
 ### Test Case #3
 | **Field**            |                                   | **Field**            |                                    |
 |-----------------------|-----------------------------------|-----------------------|------------------------------------|
-| **Test Case #:**  3    |                                   | **Test Case Name:**   | Real-Time Ball Tracking       |
+| **Test Case #:**      |    3                               | **Test Case Name:**   | Real-Time Ball Tracking       |
 | **System:**           | DRX Website                      | **Subsystem:**        | Predictory Analysis       |
 | **Designed by:**      |  Pranjal Kishor                                 | **Design Date:**      |                                    |
 | **Executed by:**      |                                   | **Execution Date:**   |       20th Nov 2024                             |
@@ -81,7 +81,7 @@
 ### Test Case #4
 | **Field**            |                                   | **Field**            |                                    |
 |-----------------------|-----------------------------------|-----------------------|------------------------------------|
-| **Test Case #:**   4   |                                   | **Test Case Name:**   | Feedback Classification      |
+| **Test Case #:**     |      4                             | **Test Case Name:**   | Feedback Classification      |
 | **System:**           | Deep Learning Model                    | **Subsystem:**        | Training model      |
 | **Designed by:**      |  Pranjal Kishor                                 | **Design Date:**      |       20th Nov 2024                             |
 | **Executed by:**      |                                   | **Execution Date:**   |                                    |
@@ -105,7 +105,7 @@
 ### Test Case #5
 | **Field**            |                                   | **Field**            |                                    |
 |-----------------------|-----------------------------------|-----------------------|------------------------------------|
-| **Test Case #:**  5    |                                   | **Test Case Name:**   | Player Performance Analytics      |
+| **Test Case #:**      |        5                           | **Test Case Name:**   | Player Performance Analytics      |
 | **System:**           | Deep Learning Model                    | **Subsystem:**        | Analytics      |
 | **Designed by:**      |      Pranjal Kishor                             | **Design Date:**      |    20th Nov 2024                                |
 | **Executed by:**      |                                   | **Execution Date:**   |                                    |
