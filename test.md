@@ -9,7 +9,7 @@
 | **System:**           | DRX Website                      | **Subsystem:**        | User Management                   |
 | **Designed by:**      |Gopal Agarwal                                   | **Design Date:**      |  20th Nov 2024                                  |
 | **Executed by:**      |                                   | **Execution Date:**   |                                    |
-| **Short Description:**|     
+| **Short Description:**| Testing user registration functionality.    
 
 #### **Pre-conditions**:
 
