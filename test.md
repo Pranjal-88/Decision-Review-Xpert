@@ -1,15 +1,12 @@
-Here are 10 test cases for your DRX project, assuming it also has a website for users to interact with:
-
----
 
 ### Test Case #1
 **Test Case Name**: User Registration  
 **System**: DRX Website  
 **Subsystem**: User Management  
-**Designed by**: [Your Name]  
-**Design Date**: [Date]  
-**Executed by**: [Name]  
-**Execution Date**: [Date]  
+**Designed by**:  
+**Design Date**: 
+**Executed by**:  
+**Execution Date**:
 **Short Description**: Testing user registration functionality.  
 
 #### **Pre-conditions**:
@@ -29,6 +26,12 @@ Here are 10 test cases for your DRX project, assuming it also has a website for 
 
 ### Test Case #2
 **Test Case Name**: Login Functionality  
+**System**: DRX Website  
+**Subsystem**: User Management  
+**Designed by**:  
+**Design Date**: 
+**Executed by**:  
+**Execution Date**:
 **Short Description**: Testing login functionality for registered users.
 
 #### **Pre-conditions**:
@@ -47,6 +50,12 @@ Here are 10 test cases for your DRX project, assuming it also has a website for 
 
 ### Test Case #3
 **Test Case Name**: Real-Time Ball Tracking  
+**System**: DRX Website  
+**Subsystem**: Predictory Analysis
+**Designed by**:  
+**Design Date**: 
+**Executed by**:  
+**Execution Date**:
 **Short Description**: Testing ball trajectory tracking during a live match.
 
 #### **Pre-conditions**:
@@ -64,7 +73,13 @@ Here are 10 test cases for your DRX project, assuming it also has a website for 
 ---
 
 ### Test Case #4
-**Test Case Name**: Feedback Classification  
+**Test Case Name**: Feedback Classification 
+**System**: Deep Learning Model
+**Subsystem**: Training model 
+**Designed by**:  
+**Design Date**: 
+**Executed by**:  
+**Execution Date**: 
 **Short Description**: Testing positive/negative feedback classification.
 
 #### **Pre-conditions**:
@@ -85,10 +100,10 @@ Here are 10 test cases for your DRX project, assuming it also has a website for 
 **Test Case Name**: Player Performance Analytics  
 **System**: DRX Website  
 **Subsystem**: Analytics  
-**Designed by**: [Your Name]  
-**Design Date**: [Date]  
-**Executed by**: [Name]  
-**Execution Date**: [Date]  
+**Designed by**:  
+**Design Date**:  
+**Executed by**:  
+**Execution Date**:  
 **Short Description**: Testing the player performance analytics module.  
 
 #### **Pre-conditions**:
@@ -111,6 +126,10 @@ Here are 10 test cases for your DRX project, assuming it also has a website for 
 **Test Case Name**: AR Visualization  
 **System**: DRX Website  
 **Subsystem**: Augmented Reality  
+**Designed by**:  
+**Design Date**:  
+**Executed by**:  
+**Execution Date**: 
 **Short Description**: Testing AR-based immersive 3D visualization for ball tracking.  
 
 #### **Pre-conditions**:
@@ -132,6 +151,10 @@ Here are 10 test cases for your DRX project, assuming it also has a website for 
 **Test Case Name**: Database Backup  
 **System**: DRX Website  
 **Subsystem**: Data Management  
+**Designed by**:  
+**Design Date**:  
+**Executed by**:  
+**Execution Date**: 
 **Short Description**: Testing backup functionality for critical data.  
 
 #### **Pre-conditions**:
@@ -153,6 +176,10 @@ Here are 10 test cases for your DRX project, assuming it also has a website for 
 **Test Case Name**: Data Privacy and Permissions  
 **System**: DRX Website  
 **Subsystem**: Security  
+**Designed by**:  
+**Design Date**:  
+**Executed by**:  
+**Execution Date**: 
 **Short Description**: Verifying data privacy controls and access permissions.  
 
 #### **Pre-conditions**:
@@ -174,6 +201,10 @@ Here are 10 test cases for your DRX project, assuming it also has a website for 
 **Test Case Name**: Leaderboard Functionality  
 **System**: DRX Website  
 **Subsystem**: Analytics  
+**Designed by**:  
+**Design Date**:  
+**Executed by**:  
+**Execution Date**: 
 **Short Description**: Testing the leaderboard for top-performing players.  
 
 #### **Pre-conditions**:
@@ -195,6 +226,10 @@ Here are 10 test cases for your DRX project, assuming it also has a website for 
 **Test Case Name**: Mobile Responsiveness  
 **System**: DRX Website  
 **Subsystem**: UI/UX  
+**Designed by**:  
+**Design Date**:  
+**Executed by**:  
+**Execution Date**: 
 **Short Description**: Testing the website's responsiveness on mobile devices.  
 
 #### **Pre-conditions**:
