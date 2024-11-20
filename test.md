@@ -3,14 +3,13 @@
 ---
 
 ### Test Case #1
-**Test Case Name**: User Registration  
-**System**: DRX Website  
-**Subsystem**: User Management  
-**Designed by**:  
-**Design Date**: 
-**Executed by**:  
-**Execution Date**:
-**Short Description**: Testing user registration functionality.  
+| **Field**            |                                   | **Field**            |                                    |
+|-----------------------|-----------------------------------|-----------------------|------------------------------------|
+| **Test Case #:**      |                                   | **Test Case Name:**   | User Registration                 |
+| **System:**           | DRX Website                      | **Subsystem:**        | User Management                   |
+| **Designed by:**      |Gopal Agarwal                                   | **Design Date:**      |                                    |
+| **Executed by:**      |                                   | **Execution Date:**   |                                    |
+| **Short Description:**|     
 
 #### **Pre-conditions**:
 - Website is running.
@@ -28,14 +27,13 @@
 ---
 
 ### Test Case #2
-**Test Case Name**: Login Functionality  
-**System**: DRX Website  
-**Subsystem**: User Management  
-**Designed by**:  
-**Design Date**: 
-**Executed by**:  
-**Execution Date**:
-**Short Description**: Testing login functionality for registered users.
+| **Field**            |                                   | **Field**            |                                    |
+|-----------------------|-----------------------------------|-----------------------|------------------------------------|
+| **Test Case #:**      |                                   | **Test Case Name:**   | Login Functionality         |
+| **System:**           | DRX Website                      | **Subsystem:**        | User Management                   |
+| **Designed by:**      | Gopal Agarwal                                  | **Design Date:**      |                                    |
+| **Executed by:**      |                                   | **Execution Date:**   |                                    |
+| **Short Description:**| Testing login functionality for registered users.
 
 #### **Pre-conditions**:
 - At least one user is registered.
@@ -52,14 +50,13 @@
 ---
 
 ### Test Case #3
-**Test Case Name**: Real-Time Ball Tracking  
-**System**: DRX Website  
-**Subsystem**: Predictory Analysis
-**Designed by**:  
-**Design Date**: 
-**Executed by**:  
-**Execution Date**:
-**Short Description**: Testing ball trajectory tracking during a live match.
+| **Field**            |                                   | **Field**            |                                    |
+|-----------------------|-----------------------------------|-----------------------|------------------------------------|
+| **Test Case #:**      |                                   | **Test Case Name:**   | Real-Time Ball Tracking       |
+| **System:**           | DRX Website                      | **Subsystem:**        | Predictory Analysis       |
+| **Designed by:**      |  Pranjal Kishor                                 | **Design Date:**      |                                    |
+| **Executed by:**      |                                   | **Execution Date:**   |                                    |
+| **Short Description:**| Testing ball trajectory tracking during a live match.
 
 #### **Pre-conditions**:
 - Live match is being streamed.
@@ -76,14 +73,13 @@
 ---
 
 ### Test Case #4
-**Test Case Name**: Feedback Classification 
-**System**: Deep Learning Model
-**Subsystem**: Training model 
-**Designed by**:  
-**Design Date**: 
-**Executed by**:  
-**Execution Date**: 
-**Short Description**: Testing positive/negative feedback classification.
+| **Field**            |                                   | **Field**            |                                    |
+|-----------------------|-----------------------------------|-----------------------|------------------------------------|
+| **Test Case #:**      |                                   | **Test Case Name:**   | Feedback Classification      |
+| **System:**           | Deep Learning Model                    | **Subsystem:**        | Training model      |
+| **Designed by:**      |  Pranjal Kishor                                 | **Design Date:**      |                                    |
+| **Executed by:**      |                                   | **Execution Date:**   |                                    |
+| **Short Description:**| Testing positive/negative feedback classification.
 
 #### **Pre-conditions**:
 - Feedback module is enabled.
@@ -100,14 +96,13 @@
 
 
 ### Test Case #5
-**Test Case Name**: Player Performance Analytics  
-**System**: DRX Website  
-**Subsystem**: Analytics  
-**Designed by**:  
-**Design Date**:  
-**Executed by**:  
-**Execution Date**:  
-**Short Description**: Testing the player performance analytics module.  
+| **Field**            |                                   | **Field**            |                                    |
+|-----------------------|-----------------------------------|-----------------------|------------------------------------|
+| **Test Case #:**      |                                   | **Test Case Name:**   | Player Performance Analytics      |
+| **System:**           | Deep Learning Model                    | **Subsystem:**        | Analytics      |
+| **Designed by:**      |      Pranjal Kishor                             | **Design Date:**      |                                    |
+| **Executed by:**      |                                   | **Execution Date:**   |                                    |
+| **Short Description:**| Testing the player performance analytics module.
 
 #### **Pre-conditions**:
 - Player performance data is available in the database.  
