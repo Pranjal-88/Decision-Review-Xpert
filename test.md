@@ -1,4 +1,4 @@
-Here’s an expanded version of the remaining test cases:
+# Test Case Templates
 
 ---
 
@@ -132,5 +132,3 @@ Here’s an expanded version of the remaining test cases:
 - Website is mobile-friendly and fully responsive.
 
 ---
-
-Let me know if you need further customization!
