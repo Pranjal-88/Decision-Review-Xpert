@@ -6,10 +6,10 @@
 **Test Case Name**: User Registration  
 **System**: DRX Website  
 **Subsystem**: User Management  
-**Designed by**: [Your Name]  
-**Design Date**: [Date]  
-**Executed by**: [Name]  
-**Execution Date**: [Date]  
+**Designed by**:  
+**Design Date**: 
+**Executed by**:  
+**Execution Date**:
 **Short Description**: Testing user registration functionality.  
 
 #### **Pre-conditions**:
@@ -29,6 +29,12 @@
 
 ### Test Case #2
 **Test Case Name**: Login Functionality  
+**System**: DRX Website  
+**Subsystem**: User Management  
+**Designed by**:  
+**Design Date**: 
+**Executed by**:  
+**Execution Date**:
 **Short Description**: Testing login functionality for registered users.
 
 #### **Pre-conditions**:
@@ -47,6 +53,12 @@
 
 ### Test Case #3
 **Test Case Name**: Real-Time Ball Tracking  
+**System**: DRX Website  
+**Subsystem**: Predictory Analysis
+**Designed by**:  
+**Design Date**: 
+**Executed by**:  
+**Execution Date**:
 **Short Description**: Testing ball trajectory tracking during a live match.
 
 #### **Pre-conditions**:
@@ -64,7 +76,13 @@
 ---
 
 ### Test Case #4
-**Test Case Name**: Feedback Classification  
+**Test Case Name**: Feedback Classification 
+**System**: Deep Learning Model
+**Subsystem**: Training model 
+**Designed by**:  
+**Design Date**: 
+**Executed by**:  
+**Execution Date**: 
 **Short Description**: Testing positive/negative feedback classification.
 
 #### **Pre-conditions**:
@@ -85,10 +103,10 @@
 **Test Case Name**: Player Performance Analytics  
 **System**: DRX Website  
 **Subsystem**: Analytics  
-**Designed by**: [Your Name]  
-**Design Date**: [Date]  
-**Executed by**: [Name]  
-**Execution Date**: [Date]  
+**Designed by**:  
+**Design Date**:  
+**Executed by**:  
+**Execution Date**:  
 **Short Description**: Testing the player performance analytics module.  
 
 #### **Pre-conditions**:
@@ -111,6 +129,10 @@
 **Test Case Name**: AR Visualization  
 **System**: DRX Website  
 **Subsystem**: Augmented Reality  
+**Designed by**:  
+**Design Date**:  
+**Executed by**:  
+**Execution Date**: 
 **Short Description**: Testing AR-based immersive 3D visualization for ball tracking.  
 
 #### **Pre-conditions**:
@@ -132,6 +154,10 @@
 **Test Case Name**: Database Backup  
 **System**: DRX Website  
 **Subsystem**: Data Management  
+**Designed by**:  
+**Design Date**:  
+**Executed by**:  
+**Execution Date**: 
 **Short Description**: Testing backup functionality for critical data.  
 
 #### **Pre-conditions**:
@@ -153,6 +179,10 @@
 **Test Case Name**: Data Privacy and Permissions  
 **System**: DRX Website  
 **Subsystem**: Security  
+**Designed by**:  
+**Design Date**:  
+**Executed by**:  
+**Execution Date**: 
 **Short Description**: Verifying data privacy controls and access permissions.  
 
 #### **Pre-conditions**:
@@ -174,6 +204,10 @@
 **Test Case Name**: Leaderboard Functionality  
 **System**: DRX Website  
 **Subsystem**: Analytics  
+**Designed by**:  
+**Design Date**:  
+**Executed by**:  
+**Execution Date**: 
 **Short Description**: Testing the leaderboard for top-performing players.  
 
 #### **Pre-conditions**:
