@@ -1,4 +1,4 @@
-Here are 10 test cases for your DRX project, assuming it also has a website for users to interact with:
+# Test Case Templates for DRX
 
 ---
 
@@ -192,10 +192,14 @@ Here are 10 test cases for your DRX project, assuming it also has a website for 
 ---
 
 ### Test Case #10
-**Test Case Name**: Mobile Responsiveness  
-**System**: DRX Website  
-**Subsystem**: UI/UX  
-**Short Description**: Testing the website's responsiveness on mobile devices.  
+| **Field**            |                                   | **Field**            |                                    |
+|-----------------------|-----------------------------------|-----------------------|------------------------------------|
+| **Test Case #:**      |                                   | **Test Case Name:**   | User Registration                 |
+| **System:**           | DRX Website                      | **Subsystem:**        | User Management                   |
+| **Designed by:**      |                                   | **Design Date:**      |                                    |
+| **Executed by:**      |                                   | **Execution Date:**   |                                    |
+| **Short Description:**|                                   |                       |                                    |
+
 
 #### **Pre-conditions**:
 - Website is operational.  
