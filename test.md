@@ -1,6 +1,85 @@
-# Test Case Templates
+Here are 10 test cases for your DRX project, assuming it also has a website for users to interact with:
 
 ---
+
+### Test Case #1
+**Test Case Name**: User Registration  
+**System**: DRX Website  
+**Subsystem**: User Management  
+**Designed by**: [Your Name]  
+**Design Date**: [Date]  
+**Executed by**: [Name]  
+**Execution Date**: [Date]  
+**Short Description**: Testing user registration functionality.  
+
+#### **Pre-conditions**:
+- Website is running.
+- Registration page is accessible.
+
+| **Step** | **Action**                          | **Expected System Response**                                                                                     | **Pass/Fail** | **Comment** |
+|----------|-------------------------------------|------------------------------------------------------------------------------------------------------------------|---------------|-------------|
+| 1        | Navigate to the registration page. | Registration page loads successfully.                                                                            |               |             |
+| 2        | Enter valid details and submit.    | User receives a confirmation message and is added to the database.                                               |               |             |
+| 3        | Try submitting an incomplete form. | System displays an error message and prevents submission.                                                        |               |             |
+
+#### **Post-conditions**:
+- User is registered in the database.
+
+---
+
+### Test Case #2
+**Test Case Name**: Login Functionality  
+**Short Description**: Testing login functionality for registered users.
+
+#### **Pre-conditions**:
+- At least one user is registered.
+
+| **Step** | **Action**                                  | **Expected System Response**                                           | **Pass/Fail** | **Comment** |
+|----------|---------------------------------------------|------------------------------------------------------------------------|---------------|-------------|
+| 1        | Enter correct credentials and log in.       | System logs the user in and redirects to the homepage.                 |               |             |
+| 2        | Enter incorrect credentials and log in.     | System displays an error message: "Invalid credentials."               |               |             |
+| 3        | Attempt to log in with an unregistered user.| System displays an error message: "User not found."                    |               |             |
+
+#### **Post-conditions**:
+- User is logged in for valid credentials.
+
+---
+
+### Test Case #3
+**Test Case Name**: Real-Time Ball Tracking  
+**Short Description**: Testing ball trajectory tracking during a live match.
+
+#### **Pre-conditions**:
+- Live match is being streamed.
+
+| **Step** | **Action**                                      | **Expected System Response**                                            | **Pass/Fail** | **Comment** |
+|----------|-------------------------------------------------|-------------------------------------------------------------------------|---------------|-------------|
+| 1        | Begin live match tracking.                      | System detects the ball and starts displaying trajectory predictions.   |               |             |
+| 2        | Test tracking for high-speed balls.             | System tracks the ball accurately without delay.                        |               |             |
+| 3        | Test tracking under low-light conditions.       | System adjusts and continues tracking with minimal accuracy loss.       |               |             |
+
+#### **Post-conditions**:
+- Trajectory data is logged and displayed.
+
+---
+
+### Test Case #4
+**Test Case Name**: Feedback Classification  
+**Short Description**: Testing positive/negative feedback classification.
+
+#### **Pre-conditions**:
+- Feedback module is enabled.
+
+| **Step** | **Action**                              | **Expected System Response**                                             | **Pass/Fail** | **Comment** |
+|----------|-----------------------------------------|--------------------------------------------------------------------------|---------------|-------------|
+| 1        | Enter positive feedback (e.g., "Great!").| System classifies the feedback as "Positive."                           |               |             |
+| 2        | Enter negative feedback (e.g., "Bad."). | System classifies the feedback as "Negative."                           |               |             |
+
+#### **Post-conditions**:
+- Feedback is correctly categorized.
+
+---
+
 
 ### Test Case #5
 **Test Case Name**: Player Performance Analytics  
