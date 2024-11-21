@@ -11,8 +11,20 @@ const DRXLogin = () => {
     setIsClient(true);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const response = await fetch('http://localhost:8000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: email, password: password }),
+    });
+
+    const json = await response.json();
+    console.log(json);
+
   };
 
   if (!isClient) {
