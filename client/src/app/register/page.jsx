@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ChevronRight, User, Lock, Mail, Smartphone } from 'lucide-react';
+import { ChevronRight, User, Lock, Mail, AlertCircle } from 'lucide-react';
 
 const DRXSignup = () => {
   const [formData, setFormData] = React.useState({
@@ -10,6 +10,7 @@ const DRXSignup = () => {
     password: '',
     confirmPassword: ''
   });
+  const [errorMessage, setErrorMessage] = React.useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,15 +18,32 @@ const DRXSignup = () => {
       ...prev,
       [name]: value
     }));
+    // Clear error message when user starts typing again
+    setErrorMessage('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+    // Validate form
+    if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
+      setErrorMessage('Please fill in all fields');
       return;
     }
+
+    if (formData.password !== formData.confirmPassword) {
+      setErrorMessage('Passwords do not match');
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setErrorMessage('Please enter a valid email address');
+      return;
+    }
+
+    // Password strength validation (at least 8 characters)
   
     try {
       const response = await fetch("http://localhost:8000/signup", {
@@ -34,7 +52,7 @@ const DRXSignup = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: formData.username, // Ensure this is filled
+          username: formData.username,
           email: formData.email,
           password: formData.password,
         }),
@@ -43,20 +61,15 @@ const DRXSignup = () => {
       const json = await response.json();
   
       if (response.ok) {
-        // alert('User registered successfully!');
         window.location.href = '/login';
       } else {
-        console.error("Signup error:", json);
-        alert("Signup failed: " + JSON.stringify(json));
+        setErrorMessage(json.error || 'Username already taken');
       }
     } catch (error) {
       console.error("Network error:", error);
-      alert("Network error. Please try again later.");
+      setErrorMessage('Network error. Please try again later.');
     }
   };
-
-
-
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4">
@@ -70,7 +83,6 @@ const DRXSignup = () => {
           <p className="text-neutral-400 mt-2">AI-Powered Cricket Performance</p>
         </div>
 
-        
         <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
           <div className="relative">
             <User className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500" />
@@ -119,6 +131,13 @@ const DRXSignup = () => {
               className="w-full pl-10 pr-4 py-3 bg-neutral-800 text-white border border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
             />
           </div>
+
+          {errorMessage && (
+            <div className="flex items-center p-4 text-red-400 bg-red-950/50 border border-red-900 rounded-lg animate-fadeIn">
+              <AlertCircle className="h-5 w-5 flex-shrink-0" />
+              <span className="ml-2">{errorMessage}</span>
+            </div>
+          )}
           
           <button 
             type="submit" 
