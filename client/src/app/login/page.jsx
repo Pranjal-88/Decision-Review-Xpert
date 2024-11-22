@@ -4,7 +4,7 @@ import { ChevronRight, User, Lock } from 'lucide-react';
 
 const DRXLogin = () => {
   const [isClient, setIsClient] = useState(false);
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   useEffect(() => {
@@ -13,23 +13,32 @@ const DRXLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(username, password);
+  
     const response = await fetch('http://localhost:8000/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, password: password }),
+      body: JSON.stringify({ username, password }), // Use 'username' instead of 'email'
     });
-
+  
     const json = await response.json();
+    if (response.ok){
+      window.location.href='/'
+    } else {
+      alert("Invalid credentials")
+    }
     console.log(json);
-
   };
+
+  
+  
 
   if (!isClient) {
     return null;
   }
+  
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4">
@@ -47,10 +56,10 @@ const DRXLogin = () => {
           <div className="relative">
             <User className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500" />
             <input 
-              type="email"
-              placeholder="Email Address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full pl-10 pr-4 py-3 bg-neutral-800 text-white border border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
             />
           </div>

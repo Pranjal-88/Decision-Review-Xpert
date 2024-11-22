@@ -5,9 +5,8 @@ import { ChevronRight, User, Lock, Mail, Smartphone } from 'lucide-react';
 
 const DRXSignup = () => {
   const [formData, setFormData] = React.useState({
-    name: '',
+    username: '',
     email: '',
-    phone: '',
     password: '',
     confirmPassword: ''
   });
@@ -20,13 +19,44 @@ const DRXSignup = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+  
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
+  
+    try {
+      const response = await fetch("http://localhost:8000/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: formData.username, // Ensure this is filled
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+  
+      const json = await response.json();
+  
+      if (response.ok) {
+        // alert('User registered successfully!');
+        window.location.href = '/login';
+      } else {
+        console.error("Signup error:", json);
+        alert("Signup failed: " + JSON.stringify(json));
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      alert("Network error. Please try again later.");
+    }
   };
+
+
+
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4">
@@ -46,9 +76,9 @@ const DRXSignup = () => {
             <User className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500" />
             <input 
               type="text"
-              name="name"
+              name="username"
               placeholder="Full Name"
-              value={formData.name}
+              value={formData.username}
               onChange={handleChange}
               className="w-full pl-10 pr-4 py-3 bg-neutral-800 text-white border border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
             />
@@ -61,18 +91,6 @@ const DRXSignup = () => {
               name="email"
               placeholder="Email Address"
               value={formData.email}
-              onChange={handleChange}
-              className="w-full pl-10 pr-4 py-3 bg-neutral-800 text-white border border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
-            />
-          </div>
-
-          <div className="relative">
-            <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500" />
-            <input 
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              value={formData.phone}
               onChange={handleChange}
               className="w-full pl-10 pr-4 py-3 bg-neutral-800 text-white border border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
             />
