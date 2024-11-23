@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate
 from .serializers import SignupSerializer, LoginSerializer,MatchSerializer
-from .models import Player,Match
-from .serializers import PlayerSerializer
+from .models import Player,Match,Training
+from .serializers import PlayerSerializer,TrainingSerializer
 from rest_framework import generics
 
 class SignupView(APIView):
@@ -32,4 +32,10 @@ class PlayerListView(generics.ListCreateAPIView):
 class MatchListView(generics.ListCreateAPIView):
     queryset = Match.objects.all()
     serializer_class = MatchSerializer
+
+class TrainingSessionView(APIView):
+    def get(self, request):
+        sessions = Training.objects.all()
+        serializer = TrainingSerializer(sessions, many=True)
+        return Response(serializer.data)
 

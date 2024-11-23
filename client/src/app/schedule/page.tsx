@@ -12,51 +12,54 @@ import {
   Bell,
   ChevronLeft,
   ChevronRight,
+  Clock,
   User
 } from 'lucide-react';
 
 const SchedulePage = () => {
   const [teamMatches, setTeamMatches] = useState([]);
-  const trainingSchedule = [
-    {
-      id: 1,
-      title: "Batting Practice",
-      player: "David Warner",
-      time: "9:00 AM",
-      coach: "Mike Hussey",
-      type: "Individual",
-      focus: "Power Hitting",
-      photoId: "123"
-    },
-    {
-      id: 2,
-      title: "Bowling Analysis",
-      player: "Pat Cummins",
-      time: "11:00 AM",
-      coach: "Brett Lee",
-      type: "Individual",
-      focus: "Speed Training",
-      photoId: "456"
-    },
-    {
-      id: 3,
-      title: "Fielding Drills",
-      player: "Steve Smith",
-      time: "2:00 PM",
-      coach: "Ricky Ponting",
-      type: "Individual",
-      focus: "Reflexes",
-      photoId: "789"
-    }
-  ];
+  const [trainingSchedule, setTraining] = useState([]);
 
   useEffect(() => {
-    // Fetch matches from the backend API
     fetch('http://127.0.0.1:8000/matches')
       .then(response => response.json())
       .then(data => setTeamMatches(data))
       .catch(error => console.error('Error fetching matches:', error));
   }, []);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/training')
+      .then(response => response.json())
+      .then(data => setTraining(data))
+      .catch(error => console.error('Error fetching matches:', error));
+  }, []);
+
+  // Function to get format-specific colors
+  const getFormatColor = (format) => {
+    switch (format.toLowerCase()) {
+      case 't20':
+        return 'bg-green-500/10 text-green-500';
+      case 'test':
+        return 'bg-red-500/10 text-red-500';
+      case 'odi':
+        return 'bg-blue-500/10 text-blue-500';
+      default:
+        return 'bg-blue-500/10 text-blue-500';
+    }
+  };
+
+  // Function to get role-specific border color
+  const getRoleColors = (role) => {
+    return role === "Bowler" ? {
+      border: "border-green-500",
+      icon: "text-green-500",
+      badge: "bg-green-500/10 text-green-500"
+    } : {
+      border: "border-purple-500",
+      icon: "text-purple-500",
+      badge: "bg-purple-500/10 text-purple-500"
+    };
+  };
 
   return (
     <div className="min-h-screen bg-black flex">
@@ -119,7 +122,6 @@ const SchedulePage = () => {
               <button className="p-1 text-neutral-400 hover:text-white transition">
                 <ChevronLeft size={20} />
               </button>
-              <span className="text-white px-2">March 2024</span>
               <button className="p-1 text-neutral-400 hover:text-white transition">
                 <ChevronRight size={20} />
               </button>
@@ -143,12 +145,12 @@ const SchedulePage = () => {
             {teamMatches.map((match) => (
               <div key={match.id} className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-800 transition">
                 <div className="flex items-center justify-between mb-4">
-                <img 
+                  <img 
                     src={match.team_logo} 
                     alt={match.team_name}
                     className="w-16 h-16 rounded-lg object-cover bg-neutral-800"
                   />
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-500/10 text-blue-500">
+                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${getFormatColor(match.format)}`}>
                     {match.format}
                   </span>
                 </div>
@@ -171,42 +173,55 @@ const SchedulePage = () => {
             </button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {trainingSchedule.map((session) => (
-              <div key={session.id} className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-800 transition">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-4">
-                    <img 
-                      src={`/api/placeholder/64/64/${session.photoId}`} 
-                      alt={session.player}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-purple-500"
-                    />
-                    <div>
-                      <h3 className="text-lg font-bold text-white">{session.player}</h3>
-                      <p className="text-sm text-neutral-400">{session.title}</p>
+          {trainingSchedule.map((session) => {
+              const roleColors = getRoleColors(session.player.role);
+              
+              return (
+                <div key={session.id} className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-800 transition">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-4">
+                      <img
+                        src={`http://127.0.0.1:8000/${session.player.photograph}`}
+                        alt={session.player.player_name}
+                        className={`w-12 h-12 rounded-full object-cover border-2 ${roleColors.border}`}
+                      />
+                      <div>
+                        <h3 className="text-lg font-bold text-white">{session.player.player_name}</h3>
+                        <p className="text-sm text-neutral-400">{session.player.role}</p>
+                      </div>
+                    </div>
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${roleColors.badge}`}>
+                      {session.remark}
+                    </span>
+                  </div>
+                  <div className="space-y-3 text-sm mt-4">
+                    <div className="flex items-center justify-between p-3 bg-neutral-800/50 rounded-lg">
+                      <div className="flex items-center space-x-2">
+                        <Target size={16} className={roleColors.icon} />
+                        <span className="text-neutral-400">Coach</span>
+                      </div>
+                      <span className="text-white">
+                        {session.player.role === "Batsman" ? "Ravi Shastri" : "Dale Steyn"}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-neutral-800/50 rounded-lg">
+                      <div className="flex items-center space-x-2">
+                        <Calendar size={16} className={roleColors.icon} />
+                        <span className="text-neutral-400">Date</span>
+                      </div>
+                      <span className="text-white">{session.date}</span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-neutral-800/50 rounded-lg">
+                      <div className="flex items-center space-x-2">
+                        <Clock size={16} className={roleColors.icon} />
+                        <span className="text-neutral-400">Time</span>
+                      </div>
+                      <span className="text-white">{session.time}</span>
                     </div>
                   </div>
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-500">
-                    {session.focus}
-                  </span>
                 </div>
-                <div className="space-y-3 text-sm mt-4">
-                  <div className="flex items-center justify-between p-3 bg-neutral-800/50 rounded-lg">
-                    <div className="flex items-center space-x-2">
-                      <Target size={16} className="text-purple-500" />
-                      <span className="text-neutral-400">Coach</span>
-                    </div>
-                    <span className="text-white">{session.coach}</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-neutral-800/50 rounded-lg">
-                    <div className="flex items-center space-x-2">
-                      <Calendar size={16} className="text-purple-500" />
-                      <span className="text-neutral-400">Time</span>
-                    </div>
-                    <span className="text-white">{session.time}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
