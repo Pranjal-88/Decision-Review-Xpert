@@ -28,7 +28,7 @@ const DRXSettings = () => {
         </div>
         
         <nav className="space-y-2">
-          <a href="/dashboard" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
+          <a href="/" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
             <BarChart3 size={20} />
             <span>Dashboard</span>
           </a>
