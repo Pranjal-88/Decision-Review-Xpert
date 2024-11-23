@@ -28,13 +28,17 @@ class PlayerSerializer(serializers.ModelSerializer):
         fields = ['player_id', 'player_name', 'age', 'team', 'role', 'average', 'photograph']
 
 class MatchSerializer(serializers.ModelSerializer):
+    date = serializers.DateField(format='%d-%m-%Y')  
+
     class Meta:
         model = Match
-        fields = ['id', 'team_name', 'format', 'team_logo', 'date', 'time', 'venue']  
+        fields = ['id', 'team_name', 'format', 'team_logo', 'date', 'time', 'venue']
 
 class TrainingSerializer(serializers.ModelSerializer):
-    player=PlayerSerializer()
+    player = PlayerSerializer()
+    date = serializers.DateField(format='%d-%m-%Y') 
+
     class Meta:
-        model=Training  
-        fields=['player','date','time','remark']
+        model = Training
+        fields = ['player', 'date', 'time', 'remark']
 
