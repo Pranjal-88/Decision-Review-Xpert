@@ -75,12 +75,12 @@ const TrainingVideosPage = () => {
             <span>Players</span>
           </a>
           
-          <a href="/analysis" className="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg text-white">
+          <a href="/analysis" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
             <Crosshair size={20} />
             <span>Trajectory Analysis</span>
           </a>
           
-          <a href="/training-videos" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
+          <a href="/training-videos" className="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg text-white">
             <Video size={20} />
             <span>Training Videos</span>
           </a>

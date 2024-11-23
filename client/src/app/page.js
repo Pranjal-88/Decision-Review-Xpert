@@ -69,7 +69,7 @@ const DRXDashboard = () => {
         </div>
         
         <nav className="space-y-2">
-          <a href="/" className="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg text-white">
+          <a href="/dashboard" className="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg text-white">
             <BarChart3 size={20} />
             <span>Dashboard</span>
           </a>
