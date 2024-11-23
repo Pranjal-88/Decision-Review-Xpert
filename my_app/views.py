@@ -2,8 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate
-from .serializers import SignupSerializer, LoginSerializer
-from .models import Player
+from .serializers import SignupSerializer, LoginSerializer,MatchSerializer
+from .models import Player,Match
 from .serializers import PlayerSerializer
 from rest_framework import generics
 
@@ -28,4 +28,8 @@ class LoginView(APIView):
 class PlayerListView(generics.ListCreateAPIView):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
+
+class MatchListView(generics.ListCreateAPIView):
+    queryset = Match.objects.all()
+    serializer_class = MatchSerializer
 

@@ -16,3 +16,27 @@ class Player(models.Model):
 
     def __str__(self):
         return f"{self.player_name} - {self.role} ({self.team})"
+    
+
+class Match(models.Model):
+    TEAM_FORMAT_CHOICES = [
+        ('T20', 'T20'),
+        ('ODI', 'ODI'),
+        ('Test', 'Test'),
+    ]
+
+    id = models.AutoField(primary_key=True)
+    team_name = models.CharField(max_length=100, verbose_name="Team Name")
+    format = models.CharField(max_length=10, choices=TEAM_FORMAT_CHOICES, verbose_name="Match Format")
+    team_logo = models.ImageField(upload_to='team_logos/', blank=True, null=True)
+    date = models.DateField(verbose_name="Match Date")
+    time = models.TimeField(verbose_name="Match Time")
+    venue = models.CharField(max_length=200, verbose_name="Match Venue")
+
+    def __str__(self):
+        return f"{self.team_name} ({self.format}) - {self.date}"
+
+    class Meta:
+        ordering = ['date', 'time']
+        verbose_name = "Match"
+        verbose_name_plural = "Matches"

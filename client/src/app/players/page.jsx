@@ -80,7 +80,7 @@ const PlayersPage = () => {
             <span>Settings</span>
           </a>
           
-          <a href="/logout" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
+          <a href="/login" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
             <LogOut size={20} />
             <span>Logout</span>
           </a>
