@@ -6,13 +6,13 @@ class Player(models.Model):
         ('Bowler', 'Bowler'),
     ]
 
-    player_id = models.AutoField(primary_key=True)  # Auto-incrementing ID for the player
-    player_name = models.CharField(max_length=100)  # Name of the player
-    age = models.IntegerField()  # Age of the player
-    team = models.CharField(max_length=100)  # Team name
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES)  # Player's role: Batsman or Bowler
+    player_id = models.AutoField(primary_key=True)  
+    player_name = models.CharField(max_length=100)  
+    age = models.IntegerField()  
+    team = models.CharField(max_length=100)  
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES)  
     average = models.FloatField()  # Average score of the player
-    photograph = models.ImageField(upload_to='player_photos/', blank=True, null=True)  # Photo of the player
+    photograph = models.ImageField(upload_to='player_photos/', blank=True, null=True)  
 
     def __str__(self):
         return f"{self.player_name} - {self.role} ({self.team})"
@@ -40,3 +40,15 @@ class Match(models.Model):
         ordering = ['date', 'time']
         verbose_name = "Match"
         verbose_name_plural = "Matches"
+
+class Training(models.Model):
+    player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="trainings")
+    date=models.DateField()
+    time = models.TimeField()  
+    remark = models.TextField(blank=True, null=True)  
+
+    def __str__(self):
+        return f"Training for {self.player.player_name} at {self.time}"
+    
+    class Meta:
+        ordering = ['date', 'time']
