@@ -167,7 +167,7 @@ const PlayersPage = () => {
             <select
               value={roleFilter}
               onChange={(e) => setRoleFilter(e.target.value)}
-              className="bg-neutral-900 border border-neutral-800 rounded-lg px-5 py-2 text-white cursor-pointer focus:outline-none focus:border-cyan-500"
+              className="bg-neutral-900 border border-neutral-800 rounded-lg px-5   py-2 text-white cursor-pointer focus:outline-none focus:border-cyan-500"
             >
               <option value="All">All Roles</option>
               <option value="Batsman">Batsman</option>

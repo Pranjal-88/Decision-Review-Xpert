@@ -1,6 +1,7 @@
 'use client';
 
-import React from 'react';
+// import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BarChart3,
   Users,
@@ -19,17 +20,43 @@ import {
 } from 'lucide-react';
 
 const DRXDashboard = () => {
-  const recentMatches = [
-    { id: 1, player: "David Warner", date: "2024-03-20", score: 85, status: "Completed" },
-    { id: 2, player: "Virat Kohli", date: "2024-03-19", score: 92, status: "Analyzed" },
-    { id: 3, player: "Steve Smith", date: "2024-03-18", score: 76, status: "Pending" },
-  ];
+  const [recentMatches, setRecentMatches] = useState([]);
+  const [upcomingTraining, setUpcomingTraining] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const upcomingTraining = [
-    { id: 1, title: "Batting Trajectory Analysis", time: "10:00 AM", type: "Technical" },
-    { id: 2, title: "Fielding Position Optimization", time: "2:00 PM", type: "Strategic" },
-    { id: 3, title: "Bowling Speed Training", time: "4:30 PM", type: "Physical" },
-  ];
+  // Helper function to get random items
+  const getRandomItems = (data, count) => {
+    const shuffled = [...data].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  };
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        setLoading(true);
+        // Replace with actual API endpoints
+        const [playersResponse, trainingResponse] = await Promise.all([
+          fetch('http://localhost:8000/players'),
+          fetch('http://localhost:8000/training'),
+        ]);
+
+        const playersData = await playersResponse.json();
+        const trainingData = await trainingResponse.json();
+
+        // Randomly select 3 items from each
+        setRecentMatches(getRandomItems(playersData, 3));
+        setUpcomingTraining(getRandomItems(trainingData, 3));
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
+
+
 
   return (
     <div className="min-h-screen bg-black flex">
@@ -144,38 +171,47 @@ const DRXDashboard = () => {
 
         {/* Recent Activity and Training Schedule */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Recent Matches */}
-          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold text-white">Recent Analysis</h2>
-              <a href="/analysis/recent" className="text-cyan-500 hover:underline text-sm">View All</a>
+  {/* Recent Matches */}
+  <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
+    <div className="flex justify-between items-center mb-6">
+      <h2 className="text-xl font-bold text-white">Recent Analysis</h2>
+      <a href="/players" className="text-cyan-500 hover:underline text-sm">View All</a>
+    </div>
+    <div className="space-y-4">
+      {recentMatches.map((match) => (
+        <a 
+          href={`/analysis/${match.id}`} 
+          key={match.id} 
+          className="flex items-center justify-between p-4 bg-neutral-800/50 rounded-lg hover:bg-neutral-700/50 transition"
+        >
+          <div className="flex items-center space-x-4">
+            {/* Model Image */}
+            <div className="w-10 h-10 rounded-full overflow-hidden">
+              <img 
+                src={match.photograph} 
+                alt={`${match.player_name} Model`} 
+                className="w-full h-full object-cover"
+              />
             </div>
-            <div className="space-y-4">
-              {recentMatches.map((match) => (
-                <a href={`/analysis/${match.id}`} key={match.id} className="flex items-center justify-between p-4 bg-neutral-800/50 rounded-lg hover:bg-neutral-700/50 transition">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-600 to-blue-600 flex items-center justify-center">
-                      <PlayCircle size={20} className="text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white font-medium">{match.player}</p>
-                      <p className="text-neutral-400 text-sm">{match.date}</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-white font-medium">{match.score}</p>
-                    <p className="text-sm text-neutral-400">{match.status}</p>
-                  </div>
-                </a>
-              ))}
+            <div>
+              <b><p className="text-white font-medium">{match.player_name} </p></b>
+              <p className="text-neutral-400 text-sm">{match.team}</p>
             </div>
           </div>
+          <div className="text-right">
+            <p className="text-white font-medium">{match.average}</p>
+            <p className="text-sm text-neutral-400">{match.role}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
 
           {/* Training Schedule */}
           <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold text-white">Upcoming Training</h2>
-              <a href="/schedule/training" className="text-cyan-500 hover:underline text-sm">View Schedule</a>
+              <a href="/schedule" className="text-cyan-500 hover:underline text-sm">View Schedule</a>
             </div>
             <div className="space-y-4">
               {upcomingTraining.map((session) => (
@@ -185,12 +221,12 @@ const DRXDashboard = () => {
                       <Target size={20} className="text-white" />
                     </div>
                     <div>
-                      <p className="text-white font-medium">{session.title}</p>
+                      <p className="text-white font-medium">{session.remark}</p>
                       <p className="text-neutral-400 text-sm">{session.time}</p>
                     </div>
                   </div>
                   <span className="px-3 py-1 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-500">
-                    {session.type}
+                    {session.date}
                   </span>
                 </a>
               ))}
