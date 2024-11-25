@@ -120,9 +120,9 @@ const TrainingVideosPage = () => {
     if (!angle) return null;
     
     const ranges = {
-      elbow_angle: { low: 60, high: 85 },
-      head_angle: { low: 5, high: 15 },
-      knee_angle: { low: 70, high: 100 }
+      elbow_angle: { low: 80, high: 120 },
+      head_angle: { low: 0, high: 45 },
+      knee_angle: { low: 150, high: 180 }
     };
 
     const range = ranges[type];
