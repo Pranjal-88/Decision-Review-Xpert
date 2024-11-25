@@ -42,3 +42,5 @@ class TrainingSerializer(serializers.ModelSerializer):
         model = Training
         fields = ['player', 'date', 'time', 'remark']
 
+
+
