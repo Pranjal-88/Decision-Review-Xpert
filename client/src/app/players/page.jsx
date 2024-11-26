@@ -1,5 +1,5 @@
-'use client';
-import React, { useState, useEffect } from 'react';
+"use client";
+import React, { useState, useEffect } from "react";
 import {
   BarChart3,
   Users,
@@ -17,16 +17,17 @@ import {
   Target,
   ChevronDown,
   Plus,
-} from 'lucide-react';
+} from "lucide-react";
+import Link from "next/link";
 
 // Custom Role Filter Component
 const RoleFilter = ({ selectedRole, onRoleChange }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const roles = [
-    { id: 'all', label: 'All Roles', icon: <Filter size={16} /> },
-    { id: 'batsman', label: 'Batsman', icon: <Crosshair size={16} /> },
-    { id: 'bowler', label: 'Bowler', icon: <Target size={16} /> }
+    { id: "all", label: "All Roles", icon: <Filter size={16} /> },
+    { id: "batsman", label: "Batsman", icon: <Crosshair size={16} /> },
+    { id: "bowler", label: "Bowler", icon: <Target size={16} /> },
   ];
 
   return (
@@ -37,12 +38,13 @@ const RoleFilter = ({ selectedRole, onRoleChange }) => {
       >
         <Filter size={18} className="text-neutral-400" />
         <span className="text-sm font-medium">
-          {roles.find(role => role.id === selectedRole.toLowerCase())?.label || 'All Roles'}
+          {roles.find((role) => role.id === selectedRole.toLowerCase())
+            ?.label || "All Roles"}
         </span>
         <ChevronDown
           size={16}
           className={`text-neutral-400 transition-transform duration-200 ${
-            isOpen ? 'rotate-180' : ''
+            isOpen ? "rotate-180" : ""
           }`}
         />
       </button>
@@ -54,13 +56,13 @@ const RoleFilter = ({ selectedRole, onRoleChange }) => {
               <button
                 key={role.id}
                 onClick={() => {
-                  onRoleChange(role.id === 'all' ? 'All' : role.label);
+                  onRoleChange(role.id === "all" ? "All" : role.label);
                   setIsOpen(false);
                 }}
                 className={`w-full flex items-center space-x-2 px-4 py-2 text-sm ${
                   selectedRole.toLowerCase() === role.id
-                    ? 'bg-cyan-500/10 text-cyan-500'
-                    : 'text-white hover:bg-neutral-800'
+                    ? "bg-cyan-500/10 text-cyan-500"
+                    : "text-white hover:bg-neutral-800"
                 } transition-colors`}
               >
                 <span className="w-4 h-4">{role.icon}</span>
@@ -101,7 +103,7 @@ const PlayerCard = ({ player }) => {
             <p className="text-sm text-neutral-400">{player.role}</p>
           </div>
           <div className="p-2 bg-neutral-800 rounded-lg">
-            {player.role === 'Batsman' ? (
+            {player.role === "Batsman" ? (
               <Crosshair size={20} className="text-cyan-500" />
             ) : (
               <Target size={20} className="text-blue-500" />
@@ -142,20 +144,20 @@ const PlayerCard = ({ player }) => {
 // Main Page Component
 const PlayersPage = () => {
   const [players, setPlayers] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [roleFilter, setRoleFilter] = useState('All');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [roleFilter, setRoleFilter] = useState("All");
 
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/players');
+        const response = await fetch("http://127.0.0.1:8000/players");
         if (!response.ok) {
-          throw new Error('Failed to fetch players');
+          throw new Error("Failed to fetch players");
         }
         const data = await response.json();
         setPlayers(data);
       } catch (error) {
-        console.error('Error fetching players:', error);
+        console.error("Error fetching players:", error);
       }
     };
 
@@ -168,7 +170,8 @@ const PlayersPage = () => {
       player.team.toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesRole =
-      roleFilter === 'All' || player.role.toLowerCase() === roleFilter.toLowerCase();
+      roleFilter === "All" ||
+      player.role.toLowerCase() === roleFilter.toLowerCase();
 
     return matchesSearch && matchesRole;
   });
@@ -178,28 +181,49 @@ const PlayersPage = () => {
       {/* Sidebar */}
       <div className="w-64 bg-neutral-900 border-r border-neutral-800 p-4">
         <div className="mb-8">
-          <a href="/" className="block">
-            <img className="w-32 invert mx-auto" src="/drx.png" alt="DRX Logo" />
-          </a>
+          <Link href="/" className="block">
+            <img
+              className="w-32 invert mx-auto"
+              src="/drx.png"
+              alt="DRX Logo"
+            />
+          </Link>
         </div>
 
         <nav className="space-y-2">
           {[
-            { href: '/', icon: <BarChart3 size={20} />, label: 'Dashboard' },
-            { href: '/players', icon: <Users size={20} />, label: 'Players', active: true },
+            { href: "/", icon: <BarChart3 size={20} />, label: "Dashboard" },
+            {
+              href: "/players",
+              icon: <Users size={20} />,
+              label: "Players",
+              active: true,
+            },
             // { href: '/analysis', icon: <Crosshair size={20} />, label: 'Trajectory Analysis' },
-            { href: '/training-videos', icon: <Video size={20} />, label: 'Training Videos' },
-            { href: '/schedule', icon: <Calendar size={20} />, label: 'Schedule' },
-            { href: '/settings', icon: <Settings size={20} />, label: 'Settings' },
-            { href: '/login', icon: <LogOut size={20} />, label: 'Logout' },
+            {
+              href: "/training-videos",
+              icon: <Video size={20} />,
+              label: "Training Videos",
+            },
+            {
+              href: "/schedule",
+              icon: <Calendar size={20} />,
+              label: "Schedule",
+            },
+            {
+              href: "/settings",
+              icon: <Settings size={20} />,
+              label: "Settings",
+            },
+            { href: "/login", icon: <LogOut size={20} />, label: "Logout" },
           ].map((item) => (
             <a
               key={item.href}
               href={item.href}
               className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition ${
                 item.active
-                  ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white'
-                  : 'text-neutral-400 hover:bg-neutral-800'
+                  ? "bg-gradient-to-r from-cyan-600 to-blue-600 text-white"
+                  : "text-neutral-400 hover:bg-neutral-800"
               }`}
             >
               {item.icon}
@@ -214,7 +238,9 @@ const PlayersPage = () => {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-white">Players Management</h1>
+            <h1 className="text-2xl font-bold text-white">
+              Players Management
+            </h1>
             <p className="text-neutral-400">
               View and manage all player profiles and analytics
             </p>
@@ -253,7 +279,10 @@ const PlayersPage = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <RoleFilter selectedRole={roleFilter} onRoleChange={setRoleFilter} />
+            <RoleFilter
+              selectedRole={roleFilter}
+              onRoleChange={setRoleFilter}
+            />
           </div>
         </div>
 
@@ -267,9 +296,12 @@ const PlayersPage = () => {
         ) : (
           <div className="flex flex-col items-center justify-center py-12">
             <Users size={48} className="text-neutral-600 mb-4" />
-            <h3 className="text-lg font-medium text-white mb-2">No players found</h3>
+            <h3 className="text-lg font-medium text-white mb-2">
+              No players found
+            </h3>
             <p className="text-neutral-400 text-center max-w-md">
-              No players match your current search criteria. Try adjusting your filters or search query.
+              No players match your current search criteria. Try adjusting your
+              filters or search query.
             </p>
           </div>
         )}

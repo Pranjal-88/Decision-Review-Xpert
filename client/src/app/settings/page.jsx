@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   BarChart3,
   Users,
@@ -13,8 +13,9 @@ import {
   Globe,
   Eye,
   Palette,
-  Monitor
-} from 'lucide-react';
+  Monitor,
+} from "lucide-react";
+import Link from "next/link";
 
 const DRXSettings = () => {
   return (
@@ -22,43 +23,65 @@ const DRXSettings = () => {
       {/* Sidebar */}
       <div className="w-64 bg-neutral-900 border-r border-neutral-800 p-4">
         <div className="mb-8">
-          <a href="/">
-            <img className="w-32 invert mx-auto" src="/drx.png" alt="DRX Logo" />
-          </a>
+          <Link href="/">
+            <img
+              className="w-32 invert mx-auto"
+              src="/drx.png"
+              alt="DRX Logo"
+            />
+          </Link>
         </div>
-        
+
         <nav className="space-y-2">
-          <a href="/" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
+          <Link
+            href="/"
+            className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition"
+          >
             <BarChart3 size={20} />
             <span>Dashboard</span>
-          </a>
-          
-          <a href="/players" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
+          </Link>
+
+          <a
+            href="/players"
+            className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition"
+          >
             <Users size={20} />
             <span>Players</span>
           </a>
-          
+
           {/* <a href="/analysis" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
             <Crosshair size={20} />
             <span>Trajectory Analysis</span>
           </a> */}
-          
-          <a href="/training-videos" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
+
+          <a
+            href="/training-videos"
+            className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition"
+          >
             <Video size={20} />
             <span>Training Videos</span>
           </a>
-          
-          <a href="/schedule" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
+
+          <a
+            href="/schedule"
+            className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition"
+          >
             <Calendar size={20} />
             <span>Schedule</span>
           </a>
-          
-          <a href="/settings" className="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg text-white">
+
+          <a
+            href="/settings"
+            className="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg text-white"
+          >
             <Settings size={20} />
             <span>Settings</span>
           </a>
-          
-          <a href="/login" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
+
+          <a
+            href="/login"
+            className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition"
+          >
             <LogOut size={20} />
             <span>Logout</span>
           </a>
@@ -71,13 +94,21 @@ const DRXSettings = () => {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-2xl font-bold text-white">Settings</h1>
-            <p className="text-neutral-400">Manage your account and preferences</p>
+            <p className="text-neutral-400">
+              Manage your account and preferences
+            </p>
           </div>
           <div className="flex items-center space-x-4">
-            <a href="/notifications" className="p-2 text-neutral-400 hover:text-white transition">
+            <a
+              href="/notifications"
+              className="p-2 text-neutral-400 hover:text-white transition"
+            >
               <Bell size={24} />
             </a>
-            <a href="/profile" className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-600 to-blue-600" />
+            <a
+              href="/profile"
+              className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-600 to-blue-600"
+            />
           </div>
         </div>
 
@@ -159,7 +190,9 @@ const DRXSettings = () => {
             </div>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-neutral-400 mb-2">Language</label>
+                <label className="block text-sm font-medium text-neutral-400 mb-2">
+                  Language
+                </label>
                 <select className="w-full bg-neutral-800 border border-neutral-700 rounded-lg p-2 text-white">
                   <option>English</option>
                   <option>Spanish</option>
@@ -168,7 +201,9 @@ const DRXSettings = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-neutral-400 mb-2">Time Zone</label>
+                <label className="block text-sm font-medium text-neutral-400 mb-2">
+                  Time Zone
+                </label>
                 <select className="w-full bg-neutral-800 border border-neutral-700 rounded-lg p-2 text-white">
                   <option>UTC (GMT+0)</option>
                   <option>EST (GMT-5)</option>
@@ -177,7 +212,9 @@ const DRXSettings = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-neutral-400 mb-2">Theme</label>
+                <label className="block text-sm font-medium text-neutral-400 mb-2">
+                  Theme
+                </label>
                 <select className="w-full bg-neutral-800 border border-neutral-700 rounded-lg p-2 text-white">
                   <option>Dark (Default)</option>
                   <option>Light</option>
@@ -197,7 +234,9 @@ const DRXSettings = () => {
               <div className="flex items-center justify-between p-4 bg-neutral-800/50 rounded-lg">
                 <div>
                   <p className="text-white font-medium">Email Notifications</p>
-                  <p className="text-sm text-neutral-400">Receive updates via email</p>
+                  <p className="text-sm text-neutral-400">
+                    Receive updates via email
+                  </p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" className="sr-only peer" />
@@ -207,7 +246,9 @@ const DRXSettings = () => {
               <div className="flex items-center justify-between p-4 bg-neutral-800/50 rounded-lg">
                 <div>
                   <p className="text-white font-medium">Push Notifications</p>
-                  <p className="text-sm text-neutral-400">Receive browser notifications</p>
+                  <p className="text-sm text-neutral-400">
+                    Receive browser notifications
+                  </p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" className="sr-only peer" />
@@ -217,7 +258,9 @@ const DRXSettings = () => {
               <div className="flex items-center justify-between p-4 bg-neutral-800/50 rounded-lg">
                 <div>
                   <p className="text-white font-medium">Update Notifications</p>
-                  <p className="text-sm text-neutral-400">Get notified about system updates</p>
+                  <p className="text-sm text-neutral-400">
+                    Get notified about system updates
+                  </p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" className="sr-only peer" />

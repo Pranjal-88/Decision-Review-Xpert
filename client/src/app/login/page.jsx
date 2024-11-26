@@ -1,12 +1,12 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import { ChevronRight, User, Lock, AlertCircle } from 'lucide-react';
+"use client";
+import React, { useState, useEffect } from "react";
+import { ChevronRight, User, Lock, AlertCircle } from "lucide-react";
 
 const DRXLogin = () => {
   const [isClient, setIsClient] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     setIsClient(true);
@@ -15,19 +15,19 @@ const DRXLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(username, password);
-    setErrorMessage('');
-    const response = await fetch('http://localhost:8000/login', {
-      method: 'POST',
+    setErrorMessage("");
+    const response = await fetch("http://localhost:8000/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ username, password }),
     });
     const json = await response.json();
     if (response.ok) {
-      window.location.href = '/';
+      window.location.href = "/";
     } else {
-      setErrorMessage(json.error || 'Invalid credentials');
+      setErrorMessage(json.error || "Invalid credentials");
     }
     console.log(json);
   };
@@ -44,7 +44,9 @@ const DRXLogin = () => {
           <div className="flex justify-center items-center mb-4">
             <img className="w-40 invert" src="/drx.png" alt="logo" />
           </div>
-          <p className="text-neutral-400 mt-2">AI-Powered Cricket Performance</p>
+          <p className="text-neutral-400 mt-2">
+            AI-Powered Cricket Performance
+          </p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
           <div className="relative">
@@ -81,9 +83,17 @@ const DRXLogin = () => {
           </button>
         </form>
         <div className="text-center space-y-2 relative z-10">
-          <a href="#" className="text-neutral-300 hover:text-cyan-500 text-sm transition">Forgot Password?</a>
+          <a
+            href="#"
+            className="text-neutral-300 hover:text-cyan-500 text-sm transition"
+          >
+            Forgot Password?
+          </a>
           <p className="text-sm text-neutral-400">
-            Don't have an account? <a href="/register" className="text-cyan-500 hover:underline">Sign Up</a>
+            Don&apos;t have an account?{" "}
+            <a href="/register" className="text-cyan-500 hover:underline">
+              Sign Up
+            </a>
           </p>
         </div>
       </div>
