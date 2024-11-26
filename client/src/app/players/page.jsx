@@ -150,7 +150,7 @@ const PlayersPage = () => {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/players");
+        const response = await fetch("https://api.drx.rebec.in/players");
         if (!response.ok) {
           throw new Error("Failed to fetch players");
         }

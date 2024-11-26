@@ -22,14 +22,14 @@ const SchedulePage = () => {
   const [trainingSchedule, setTraining] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/matches")
+    fetch("https://api.drx.rebec.in/matches")
       .then((response) => response.json())
       .then((data) => setTeamMatches(data))
       .catch((error) => console.error("Error fetching matches:", error));
   }, []);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/training")
+    fetch("https://api.drx.rebec.in/training")
       .then((response) => response.json())
       .then((data) => setTraining(data))
       .catch((error) => console.error("Error fetching matches:", error));
@@ -227,7 +227,7 @@ const SchedulePage = () => {
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-4">
                       <img
-                        src={`http://127.0.0.1:8000/${session.player.photograph}`}
+                        src={`https://api.drx.rebec.in/${session.player.photograph}`}
                         alt={session.player.player_name}
                         className={`w-12 h-12 rounded-full object-cover border-2 ${roleColors.border}`}
                       />
