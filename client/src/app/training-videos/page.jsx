@@ -82,7 +82,7 @@ const TrainingVideosPage = () => {
       const base64Frame = canvas.toDataURL("image/jpeg").split(",")[1];
 
       // Send to API
-      const response = await fetch("http://localhost:5000/api/analyze-pose/", {
+      const response = await fetch("https://cv.drx.rebec.in/api/analyze-pose/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

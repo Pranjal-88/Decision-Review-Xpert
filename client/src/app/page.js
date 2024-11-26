@@ -37,8 +37,8 @@ const DRXDashboard = () => {
         setLoading(true);
         // Replace with actual API endpoints
         const [playersResponse, trainingResponse] = await Promise.all([
-          fetch("http://localhost:8000/players"),
-          fetch("http://localhost:8000/training"),
+          fetch("https://api.drx.rebec.in/players"),
+          fetch("https://api.drx.rebec.in/training"),
         ]);
 
         const playersData = await playersResponse.json();

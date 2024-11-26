@@ -5,7 +5,7 @@ import {
   Calendar, Bell, ChevronLeft, ChevronRight, BarChart3,
 } from "lucide-react";
 
-const API_URL = "http://localhost:5000/api/analyze-pose/";
+const API_URL = "https://cv.drx.rebec.in/api/analyze-pose/";
 
 const TrainingVideosPage = () => {
   const videoRef = useRef(null);
