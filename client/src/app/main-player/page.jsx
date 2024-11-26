@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   BarChart3,
   Users,
@@ -15,8 +15,9 @@ import {
   Target,
   LineChart,
   PlayCircle,
-  Bell
-} from 'lucide-react';
+  Bell,
+} from "lucide-react";
+import Link from "next/link";
 
 const DRXDashboard = () => {
   const [recentMatches, setRecentMatches] = useState([]);
@@ -35,8 +36,8 @@ const DRXDashboard = () => {
         setLoading(true);
         // Replace with actual API endpoints
         const [playersResponse, trainingResponse] = await Promise.all([
-            fetch("https://api.drx.rebec.in/players"),
-            fetch("https://api.drx.rebec.in/training"),
+          fetch("https://api.drx.rebec.in/players"),
+          fetch("https://api.drx.rebec.in/training"),
         ]);
 
         const playersData = await playersResponse.json();
@@ -46,7 +47,7 @@ const DRXDashboard = () => {
         setRecentMatches(getRandomItems(playersData, 1));
         setUpcomingTraining(getRandomItems(trainingData, 3));
       } catch (error) {
-        console.error('Error fetching dashboard data:', error);
+        console.error("Error fetching dashboard data:", error);
       } finally {
         setLoading(false);
       }
@@ -60,28 +61,44 @@ const DRXDashboard = () => {
       {/* Sidebar */}
       <div className="w-64 bg-neutral-900 border-r border-neutral-800 p-4">
         <div className="mb-8">
-          <a href="/">
-            <img className="w-32 invert mx-auto" src="/drx.png" alt="DRX Logo" />
-          </a>
+          <Link href="/">
+            <img
+              className="w-32 invert mx-auto"
+              src="/drx.png"
+              alt="DRX Logo"
+            />
+          </Link>
         </div>
-        
+
         <nav className="space-y-2">
-          <a href="/dashboard" className="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg text-white">
+          <a
+            href="/dashboard"
+            className="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg text-white"
+          >
             <BarChart3 size={20} />
             <span>Dashboard</span>
           </a>
-          
-          <a href="/main-video" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
+
+          <a
+            href="/main-video"
+            className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition"
+          >
             <Video size={20} />
             <span>Training Videos</span>
           </a>
-          
-          <a href="/settings" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
+
+          <a
+            href="/settings"
+            className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition"
+          >
             <Settings size={20} />
             <span>Settings</span>
           </a>
-          
-          <a href="/login" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
+
+          <a
+            href="/login"
+            className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition"
+          >
             <LogOut size={20} />
             <span>Logout</span>
           </a>
@@ -93,20 +110,33 @@ const DRXDashboard = () => {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-white">Welcome back Player</h1>
-            <p className="text-neutral-400">Here's what's happening with your team today</p>
+            <h1 className="text-2xl font-bold text-white">
+              Welcome back Player
+            </h1>
+            <p className="text-neutral-400">
+              Here&apos;s what&apos;s happening with your team today
+            </p>
           </div>
           <div className="flex items-center space-x-4">
-            <a href="/notifications" className="p-2 text-neutral-400 hover:text-white transition">
+            <a
+              href="/notifications"
+              className="p-2 text-neutral-400 hover:text-white transition"
+            >
               <Bell size={24} />
             </a>
-            <a href="/profile" className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-600 to-blue-600" />
+            <a
+              href="/profile"
+              className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-600 to-blue-600"
+            />
           </div>
         </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <a href="/stats/accuracy" className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-800 transition">
+          <a
+            href="/stats/accuracy"
+            className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-800 transition"
+          >
             <div className="flex items-center justify-between mb-4">
               <div className="p-2 bg-cyan-500/10 rounded-lg">
                 <Activity className="h-6 w-6 text-cyan-500" />
@@ -117,7 +147,10 @@ const DRXDashboard = () => {
             <p className="text-neutral-400">Average Accuracy</p>
           </a>
 
-          <a href="/stats/prediction" className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-800 transition">
+          <a
+            href="/stats/prediction"
+            className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-800 transition"
+          >
             <div className="flex items-center justify-between mb-4">
               <div className="p-2 bg-blue-500/10 rounded-lg">
                 <Target className="h-6 w-6 text-blue-500" />
@@ -128,7 +161,10 @@ const DRXDashboard = () => {
             <p className="text-neutral-400">Prediction Rate</p>
           </a>
 
-          <a href="/players/active" className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-800 transition">
+          <a
+            href="/players/active"
+            className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-800 transition"
+          >
             <div className="flex items-center justify-between mb-4">
               <div className="p-2 bg-purple-500/10 rounded-lg">
                 <Users className="h-6 w-6 text-purple-500" />
@@ -139,7 +175,10 @@ const DRXDashboard = () => {
             <p className="text-neutral-400">Active Players</p>
           </a>
 
-          <a href="/training/sessions" className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-800 transition">
+          <a
+            href="/training/sessions"
+            className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-800 transition"
+          >
             <div className="flex items-center justify-between mb-4">
               <div className="p-2 bg-pink-500/10 rounded-lg">
                 <Award className="h-6 w-6 text-pink-500" />
@@ -164,22 +203,24 @@ const DRXDashboard = () => {
                 <p className="text-neutral-400">Loading...</p>
               ) : recentMatches.length > 0 ? (
                 recentMatches.map((match) => (
-                  <a 
-                    href={`/analysis/${match.id}`} 
-                    key={match.id} 
+                  <a
+                    href={`/analysis/${match.id}`}
+                    key={match.id}
                     className="flex items-center justify-between p-4 bg-neutral-800/50 rounded-lg hover:bg-neutral-700/50 transition"
                   >
                     <div className="flex items-center space-x-4">
                       {/* Model Image */}
                       <div className="w-10 h-10 rounded-full overflow-hidden">
-                        <img 
-                          src={match.photograph} 
-                          alt={`${match.player_name} Model`} 
+                        <img
+                          src={match.photograph}
+                          alt={`${match.player_name} Model`}
                           className="w-full h-full object-cover"
                         />
                       </div>
                       <div>
-                        <p className="text-white font-medium">{match.player_name}</p>
+                        <p className="text-white font-medium">
+                          {match.player_name}
+                        </p>
                         <p className="text-neutral-400 text-sm">{match.team}</p>
                       </div>
                     </div>
@@ -198,7 +239,9 @@ const DRXDashboard = () => {
           {/* Training Schedule */}
           <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold text-white">Upcoming Training</h2>
+              <h2 className="text-xl font-bold text-white">
+                Upcoming Training
+              </h2>
               {/* <a href="/schedule" className="text-cyan-500 hover:underline text-sm">View Schedule</a> */}
             </div>
             <div className="space-y-4">
@@ -206,9 +249,9 @@ const DRXDashboard = () => {
                 <p className="text-neutral-400">Loading...</p>
               ) : upcomingTraining.length > 0 ? (
                 upcomingTraining.map((session) => (
-                  <a 
-                    href={`/training/${session.id}`} 
-                    key={session.id} 
+                  <a
+                    href={`/training/${session.id}`}
+                    key={session.id}
                     className="flex items-center justify-between p-4 bg-neutral-800/50 rounded-lg hover:bg-neutral-700/50 transition"
                   >
                     <div className="flex items-center space-x-4">
@@ -216,8 +259,12 @@ const DRXDashboard = () => {
                         <Target size={20} className="text-white" />
                       </div>
                       <div>
-                        <p className="text-white font-medium">{session.remark}</p>
-                        <p className="text-neutral-400 text-sm">{session.time}</p>
+                        <p className="text-white font-medium">
+                          {session.remark}
+                        </p>
+                        <p className="text-neutral-400 text-sm">
+                          {session.time}
+                        </p>
                       </div>
                     </div>
                     <span className="px-3 py-1 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-500">
@@ -226,7 +273,9 @@ const DRXDashboard = () => {
                   </a>
                 ))
               ) : (
-                <p className="text-neutral-400">No upcoming training sessions.</p>
+                <p className="text-neutral-400">
+                  No upcoming training sessions.
+                </p>
               )}
             </div>
           </div>
