@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-esi6dgarpknc!pumelgts!77@ohi9$de6e1^nlx%mm0@a-(*9x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'api.drx.rebec.in'
+]
 
 
 # Application definition
