@@ -187,7 +187,7 @@ const PlayersPage = () => {
           {[
             { href: '/', icon: <BarChart3 size={20} />, label: 'Dashboard' },
             { href: '/players', icon: <Users size={20} />, label: 'Players', active: true },
-            { href: '/analysis', icon: <Crosshair size={20} />, label: 'Trajectory Analysis' },
+            // { href: '/analysis', icon: <Crosshair size={20} />, label: 'Trajectory Analysis' },
             { href: '/training-videos', icon: <Video size={20} />, label: 'Training Videos' },
             { href: '/schedule', icon: <Calendar size={20} />, label: 'Schedule' },
             { href: '/settings', icon: <Settings size={20} />, label: 'Settings' },

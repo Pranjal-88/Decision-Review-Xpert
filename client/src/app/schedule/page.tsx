@@ -82,10 +82,10 @@ const SchedulePage = () => {
             <span>Players</span>
           </a>
           
-          <a href="/analysis" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
+          {/* <a href="/analysis" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
             <Crosshair size={20} />
             <span>Trajectory Analysis</span>
-          </a>
+          </a> */}
           
           <a href="/training-videos" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
             <Video size={20} />
