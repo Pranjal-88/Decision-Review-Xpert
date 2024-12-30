@@ -52,3 +52,29 @@ class Training(models.Model):
     
     class Meta:
         ordering = ['date', 'time']
+
+from django.db import models
+
+class PoseAnalysis(models.Model):
+    timestamp = models.DateTimeField(auto_now_add=True)
+    elbow_angle = models.FloatField()
+    head_position = models.FloatField()
+    knee_bend = models.FloatField()
+    
+    @property
+    def elbow_feedback(self):
+        if 80 <= self.elbow_angle <= 120:
+            return {"status": "Correct", "percentage": 95}
+        return {"status": "Adjust Slightly", "percentage": 60}
+    
+    @property
+    def head_feedback(self):
+        if 0 <= self.head_position <= 45:
+            return {"status": "Correct", "percentage": 80}
+        return {"status": "Adjust Slightly", "percentage": 60}
+    
+    @property
+    def knee_feedback(self):
+        if 150 <= self.knee_bend <= 180:
+            return {"status": "Perfect", "percentage": 95}
+        return {"status": "Adjust Slightly", "percentage": 60}

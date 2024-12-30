@@ -1,84 +1,78 @@
-from django.http import JsonResponse
-from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-import cv2
 import mediapipe as mp
 import numpy as np
+import cv2
 import base64
+from PIL import Image
+import io
 
-def calculate_angle(point1, point2, point3):
-    a = np.array([point1.x, point1.y])
-    b = np.array([point2.x, point2.y])
-    c = np.array([point3.x, point3.y])
-    
-    radians = np.arctan2(c[1] - b[1], c[0] - b[0]) - np.arctan2(a[1] - b[1], a[0] - b[0])
-    angle = np.abs(radians * 180.0 / np.pi)
-    
-    if angle > 180.0:
-        angle = 360 - angle
-        
-    return angle
-
-@api_view(['POST'])
-def analyze_pose(request):
-    try:
-        # Get frame data from request
-        frame_data = request.data.get('frame')
-        frame_bytes = base64.b64decode(frame_data.split(',')[1])
-        
-        # Convert to numpy array
-        nparr = np.frombuffer(frame_bytes, np.uint8)
-        frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        
-        # Initialize MediaPipe
-        mp_pose = mp.solutions.pose
-        with mp_pose.Pose(
+class PoseAnalysisView(APIView):
+    def __init__(self):
+        super().__init__()
+        self.mp_pose = mp.solutions.pose
+        self.pose = self.mp_pose.Pose(
             min_detection_confidence=0.5,
-            min_tracking_confidence=0.5) as pose:
+            min_tracking_confidence=0.5
+        )
+        self.mp_drawing = mp.solutions.drawing_utils
 
-            # Process frame
-            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            results = pose.process(rgb_frame)
-            
-            feedback = {}
-            if results.pose_landmarks:
-                landmarks = results.pose_landmarks.landmark
-                
-                # Calculate elbow angle
-                elbow_angle = calculate_angle(
-                    landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value],
-                    landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value],
-                    landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value]
-                )
-                
-                # Calculate knee angle
-                knee_angle = calculate_angle(
-                    landmarks[mp_pose.PoseLandmark.LEFT_HIP.value],
-                    landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value],
-                    landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value]
-                )
+    def calculate_angle(self, a, b, c):
+        a = np.array(a)
+        b = np.array(b)
+        c = np.array(c)
 
-                # Calculate head tilt angle (example: nose, shoulder, hip)
-                head_tilt_angle = calculate_angle(
-                    landmarks[mp_pose.PoseLandmark.NOSE.value],
-                    landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value],
-                    landmarks[mp_pose.PoseLandmark.LEFT_HIP.value]
-                )
+        radians = np.arctan2(c[1] - b[1], c[0] - b[0]) - np.arctan2(a[1] - b[1], a[0] - b[0])
+        angle = np.abs(radians * 180.0 / np.pi)
+        return angle if angle <= 180 else 360 - angle
 
-                # Provide feedback
-                feedback = {
-                    'elbow_angle': round(elbow_angle, 2),
-                    'knee_angle': round(knee_angle, 2),
-                    'head_tilt_angle': round(head_tilt_angle, 2)
-                }
+    def decode_base64_image(self, base64_string):
+        image_data = base64.b64decode(base64_string.split(",")[1])
+        image = Image.open(io.BytesIO(image_data))
+        return cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
 
-            return Response({
-                'success': True,
-                'feedback': feedback
-            }, status=status.HTTP_200_OK)
-    except Exception as e:
+    def process_frame(self, frame):
+        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        results = self.pose.process(image)
+
+        if not results.pose_landmarks:
+            return None, None
+
+        landmarks = results.pose_landmarks.landmark
+        h, w, _ = frame.shape
+
+        right_shoulder = [landmarks[self.mp_pose.PoseLandmark.RIGHT_SHOULDER.value].x * w,
+                          landmarks[self.mp_pose.PoseLandmark.RIGHT_SHOULDER.value].y * h]
+        right_elbow = [landmarks[self.mp_pose.PoseLandmark.RIGHT_ELBOW.value].x * w,
+                       landmarks[self.mp_pose.PoseLandmark.RIGHT_ELBOW.value].y * h]
+        right_wrist = [landmarks[self.mp_pose.PoseLandmark.RIGHT_WRIST.value].x * w,
+                       landmarks[self.mp_pose.PoseLandmark.RIGHT_WRIST.value].y * h]
+
+        elbow_angle = self.calculate_angle(right_shoulder, right_elbow, right_wrist)
+
+        return {
+            "elbow_angle": elbow_angle,
+        }, results.pose_landmarks
+
+    def post(self, request):
+        frame_data = request.data.get("frame")
+        if not frame_data:
+            return Response({"success": False, "error": "No frame data provided"}, status=status.HTTP_400_BAD_REQUEST)
+
+        frame = self.decode_base64_image(frame_data)
+        feedback, pose_landmarks = self.process_frame(frame)
+
+        if not feedback:
+            return Response({"success": False, "error": "Pose not detected"}, status=status.HTTP_200_OK)
+
+        annotated_frame = frame.copy()
+        self.mp_drawing.draw_landmarks(annotated_frame, pose_landmarks, self.mp_pose.POSE_CONNECTIONS)
+        _, buffer = cv2.imencode(".jpg", annotated_frame)
+        annotated_base64 = base64.b64encode(buffer).decode("utf-8")
+
         return Response({
-            'success': False,
-            'error': str(e)
-        }, status=status.HTTP_400_BAD_REQUEST)
+            "success": True,
+            "feedback": feedback,
+            "annotated_frame": f"data:image/jpeg;base64,{annotated_base64}"
+        })

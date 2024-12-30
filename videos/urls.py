@@ -1,7 +1,6 @@
 from django.urls import path
-from . import views
+from .views import PoseAnalysisView
 
 urlpatterns = [
-    path('api/analyze-pose/', views.analyze_pose, name='analyze_pose'),
-    path('api/save-video/', views.save_video, name='save_video'),
+    path('api/analyze-pose/', PoseAnalysisView.as_view(), name='analyze_pose'),
 ]

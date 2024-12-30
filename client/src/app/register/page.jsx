@@ -46,7 +46,7 @@ const DRXSignup = () => {
     // Password strength validation (at least 8 characters)
   
     try {
-      const response = await fetch("http://localhost:8000/signup", {
+      const response = await fetch("https://api.drx.rebec.in/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

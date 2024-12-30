@@ -1,6 +1,5 @@
 "use client";
 
-// import React from 'react';
 import React, { useEffect, useState } from "react";
 import {
   BarChart3,
@@ -45,7 +44,7 @@ const DRXDashboard = () => {
         const trainingData = await trainingResponse.json();
 
         // Randomly select 3 items from each
-        setRecentMatches(getRandomItems(playersData, 3));
+        setRecentMatches(getRandomItems(playersData, 1));
         setUpcomingTraining(getRandomItems(trainingData, 3));
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
@@ -81,32 +80,11 @@ const DRXDashboard = () => {
           </a>
 
           <a
-            href="/players"
-            className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition"
-          >
-            <Users size={20} />
-            <span>Players</span>
-          </a>
-
-          {/* <a href="/analysis" className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition">
-            <Crosshair size={20} />
-            <span>Trajectory Analysis</span>
-          </a> */}
-
-          <a
-            href="/training-videos"
+            href="/main-video"
             className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition"
           >
             <Video size={20} />
             <span>Training Videos</span>
-          </a>
-
-          <a
-            href="/schedule"
-            className="flex items-center space-x-3 px-4 py-3 text-neutral-400 hover:bg-neutral-800 rounded-lg transition"
-          >
-            <Calendar size={20} />
-            <span>Schedule</span>
           </a>
 
           <a
@@ -133,7 +111,7 @@ const DRXDashboard = () => {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-2xl font-bold text-white">
-              Welcome back, Coach
+              Welcome back Player
             </h1>
             <p className="text-neutral-400">
               Here&apos;s what&apos;s happening with your team today
@@ -218,44 +196,43 @@ const DRXDashboard = () => {
           <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold text-white">Recent Analysis</h2>
-              <a
-                href="/players"
-                className="text-cyan-500 hover:underline text-sm"
-              >
-                View All
-              </a>
+              {/* <a href="/players" className="text-cyan-500 hover:underline text-sm">View All</a> */}
             </div>
             <div className="space-y-4">
-              {recentMatches.map((match) => (
-                <a
-                  href={`/analysis/${match.id}`}
-                  key={match.id}
-                  className="flex items-center justify-between p-4 bg-neutral-800/50 rounded-lg hover:bg-neutral-700/50 transition"
-                >
-                  <div className="flex items-center space-x-4">
-                    {/* Model Image */}
-                    <div className="w-10 h-10 rounded-full overflow-hidden">
-                      <img
-                        src={match.photograph}
-                        alt={`${match.player_name} Model`}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <b>
+              {loading ? (
+                <p className="text-neutral-400">Loading...</p>
+              ) : recentMatches.length > 0 ? (
+                recentMatches.map((match) => (
+                  <a
+                    href={`/analysis/${match.id}`}
+                    key={match.id}
+                    className="flex items-center justify-between p-4 bg-neutral-800/50 rounded-lg hover:bg-neutral-700/50 transition"
+                  >
+                    <div className="flex items-center space-x-4">
+                      {/* Model Image */}
+                      <div className="w-10 h-10 rounded-full overflow-hidden">
+                        <img
+                          src={match.photograph}
+                          alt={`${match.player_name} Model`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
                         <p className="text-white font-medium">
-                          {match.player_name}{" "}
+                          {match.player_name}
                         </p>
-                      </b>
-                      <p className="text-neutral-400 text-sm">{match.team}</p>
+                        <p className="text-neutral-400 text-sm">{match.team}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-white font-medium">{match.average}</p>
-                    <p className="text-sm text-neutral-400">{match.role}</p>
-                  </div>
-                </a>
-              ))}
+                    <div className="text-right">
+                      <p className="text-white font-medium">{match.average}</p>
+                      <p className="text-sm text-neutral-400">{match.role}</p>
+                    </div>
+                  </a>
+                ))
+              ) : (
+                <p className="text-neutral-400">No recent analysis found.</p>
+              )}
             </div>
           </div>
 
@@ -265,34 +242,41 @@ const DRXDashboard = () => {
               <h2 className="text-xl font-bold text-white">
                 Upcoming Training
               </h2>
-              <a
-                href="/schedule"
-                className="text-cyan-500 hover:underline text-sm"
-              >
-                View Schedule
-              </a>
+              {/* <a href="/schedule" className="text-cyan-500 hover:underline text-sm">View Schedule</a> */}
             </div>
             <div className="space-y-4">
-              {upcomingTraining.map((session) => (
-                <a
-                  href={`/training/${session.id}`}
-                  key={session.id}
-                  className="flex items-center justify-between p-4 bg-neutral-800/50 rounded-lg hover:bg-neutral-700/50 transition"
-                >
-                  <div className="flex items-center space-x-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-600 to-blue-600 flex items-center justify-center">
-                      <Target size={20} className="text-white" />
+              {loading ? (
+                <p className="text-neutral-400">Loading...</p>
+              ) : upcomingTraining.length > 0 ? (
+                upcomingTraining.map((session) => (
+                  <a
+                    href={`/training/${session.id}`}
+                    key={session.id}
+                    className="flex items-center justify-between p-4 bg-neutral-800/50 rounded-lg hover:bg-neutral-700/50 transition"
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-600 to-blue-600 flex items-center justify-center">
+                        <Target size={20} className="text-white" />
+                      </div>
+                      <div>
+                        <p className="text-white font-medium">
+                          {session.remark}
+                        </p>
+                        <p className="text-neutral-400 text-sm">
+                          {session.time}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-white font-medium">{session.remark}</p>
-                      <p className="text-neutral-400 text-sm">{session.time}</p>
-                    </div>
-                  </div>
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-500">
-                    {session.date}
-                  </span>
-                </a>
-              ))}
+                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-500">
+                      {session.date}
+                    </span>
+                  </a>
+                ))
+              ) : (
+                <p className="text-neutral-400">
+                  No upcoming training sessions.
+                </p>
+              )}
             </div>
           </div>
         </div>
